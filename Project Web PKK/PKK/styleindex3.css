@@ -1,0 +1,59 @@
+body {
+    margin: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #1d1d1d;
+    background: #071a20;
+  }
+  
+  p,
+  h2 {
+    position: relative;
+    z-index: 1;
+    margin: 20px 15%;
+  }
+  
+  p {
+    opacity: 0.8;
+  }
+  
+  section {
+    padding: 40px 0;
+  }
+  
+  .image {
+    height: 380px;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-image: url("images/lockdoor (1).jpg");
+    background-color: grey;
+background-blend-mode: multiply;
+  }
+  
+  .text {
+    position: relative;
+  }
+  
+  .text::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 125%;
+    background: #ffffff;
+    rotate: -3deg;
+    translate: -50% -50%;
+  }
+
+body::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  

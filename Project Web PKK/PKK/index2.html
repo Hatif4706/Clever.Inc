@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/clover4.png" />
+    <title>Clever.Inc</title>
+  </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+    * {
+      padding: 0;
+      margin: 0;
+      scroll-behavior: smooth;
+      box-sizing: border-box;
+      font-family: Poppins;
+    }
+
+    header {
+      position: relative;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 80px;
+    }
+
+    header h4 {
+      position: absolute;
+      left: 10%;
+      bottom: 1rem;
+      font-size: 1.6rem;
+    }
+
+    .intro {
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: #161616;
+      transition: 1s;
+    }
+
+    .logo-header {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #ffffff;
+    }
+
+    .logo {
+      position: relative;
+      display: inline-block;
+      bottom: -20px;
+      opacity: 0;
+    }
+
+    .logo.active {
+      bottom: 0;
+      opacity: 1;
+      transition: ease-in-out 0.5s;
+    }
+
+    .logo.fade {
+      bottom: 150px;
+      opacity: 0;
+      transition: ease-in-out 0.5s;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      overflow-y: scroll;
+
+      background: linear-gradient(
+        to right bottom,
+        rgb(27, 75, 209),
+        rgb(30, 64, 175),
+        rgb(17, 24, 39)
+      );
+      background-size: auto;
+      /* z-index: -999; */
+    }
+
+    body::-webkit-scrollbar {
+      display: none;
+    }
+
+    img {
+      width: 100%;
+    }
+    .profile {
+      border-radius: 50%;
+    }
+    ul {
+      list-style: none;
+    }
+    a {
+      text-decoration: none;
+    }
+    .container {
+      max-width: 80rem;
+      padding: 0 2rem;
+      margin: 0 auto;
+      margin-bottom: 7rem;
+    }
+    .container-bot {
+      max-width: 80rem;
+      padding: 0 2rem;
+      margin: 0 auto;
+      margin-bottom: 4rem;
+      
+    }
+    nav {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 50;
+    }
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 6rem;
+    }
+    .logo {
+      max-width: 250px;
+      display: flex;
+      align-items: center;
+    }
+    .links ul {
+      display: flex;
+    }
+    .links a {
+      display: inline-block;
+      padding: 0.7rem 1.2rem;
+      margin-right: 0.6rem;
+      color: #ffffff;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      font-weight: 500;
+      line-height: 1;
+      border-radius: 1.5rem;
+      transition: 0.3s;
+    }
+    .links a.active,
+    .links a:hover {
+      color: #0b0235;
+      background: #ffffff;
+    }
+    .hamburger-menu {
+      width: 2.7rem;
+      height: 3rem;
+      z-index: 100;
+      position: relative;
+      display: none;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .hamburger-menu .bar {
+      position: relative;
+      width: 2.1rem;
+      height: 3px;
+      border-radius: 3px;
+      background: #ffffff;
+    }
+    .bar::before,
+    .bar::after {
+      content: "";
+      position: absolute;
+      width: 2.1rem;
+      height: 3px;
+      border-radius: 3px;
+      background: #ffffff;
+    }
+    .bar::before {
+      transform: translateY(-9px);
+    }
+    .bar::after {
+      transform: translateY(9px);
+    }
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+    .hero #base {
+      z-index: 6;
+    }
+    .hero #text {
+      position: relative;
+      color: #fefefe;
+      font-size: clamp(3rem, 7.5vw, 8rem);
+      white-space: nowrap;
+      letter-spacing: 3px;
+      /* z-index: 1; */
+      /* right: -850px; */
+    }
+    #btn {
+      font-size: 18px;
+      position: absolute;
+      color: #fefefe;
+      text-decoration: none;
+      padding: 8px 30px;
+      display: inline-block;
+      border: 2px solid #fefefe;
+      border-radius: 10px;
+      background: transparent;
+      /* z-index: 7; */
+      letter-spacing: 0.51px;
+      transform: translateY(200px);
+    }
+
+    #btn2 {
+      text-align: center;
+      font-size: 24px;
+      position: absolute;
+      color: #1e43b8;
+      text-decoration: none;
+      padding: 8px 30px;
+      display: flex;
+      border: 2px solid #1e43b8;
+      border-radius: 10px;
+      background: transparent;
+      /* z-index: 7; */
+      letter-spacing: 0.51px;
+      transform: translateY(200px);
+      margin-bottom: 50px;
+      align-items: center;
+      justify-content: center;
+      width: 100vh;
+      margin-left: 250px;
+      margin-bottom: 300px;
+    }
+    .section-padding {
+      padding: 100px 0;
+      width: 100%;
+      background: #fefefe;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+    }
+    .grid-last{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    .left-content,
+    .right-content {
+      padding: 2rem;
+    }
+    h4 {
+      font-weight: 900;
+      letter-spacing: 0.51px;
+      line-height: 1.35;
+      text-align: justify;
+      color: #0b0235;
+      font-size: 3rem;
+    }
+    .heading {
+      font-size: 1.15rem;
+      color: #0b0235;
+      margin-bottom: 0.5rem;
+    }
+    .heading-profile {
+      font-size: 1.4rem;
+    }
+    p {
+      color: #0b0235;
+      font-size: 1.5rem;
+      padding-bottom: 2rem;
+      padding-right: 1rem;
+    }
+
+    .description {
+      font-size: 1.2rem;
+      padding-bottom: 2rem;
+      padding-right: 1rem;
+    }
+
+    footer {
+      background: #0b0235;
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    footer h1 {
+      color: #fefefe;
+      align-items: center;
+      font-size: 4rem;
+    }
+
+    @media (max-width: 992px) {
+      .hamburger-menu {
+        display: flex;
+      }
+      .links ul {
+        display: none;
+      }
+      h4 {
+        font-size: 1.2rem;
+      }
+      .heading {
+        font-size: 1rem;
+      }
+      p {
+        font-size: 0.8rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .left-content,
+      .right-content {
+        padding: 0.4rem;
+      }
+    }
+  </style>
+  <body>
+    <!-- <nav>
+    <div class="container">
+      <div class="logo">
+        <img src="images/logo.png" alt="">
+      </div>
+      <div class="links">
+        <ul>
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="hamburger-menu">
+        <div class="bar"></div>
+      </div>
+    </div>
+  </nav> -->
+
+    <div class="intro">
+      <h1 class="logo-header">
+        <span class="logo">Welcome</span><span class="logo">Users.</span>
+      </h1>
+    </div>
+
+    <section class="hero" id="hero">
+      <img
+        src="images/komteng.png"
+        class="translateX"
+        data-speed="1"
+        id="kom_tengah"
+        alt=""
+      />
+      <img src="images/aset1.png" class="translateY" data-speed="2" alt="" />
+      <img src="images/aset2.png" class="translateX" data-speed="-1" alt="" />
+      <img src="images/aset4.png" class="translateX" data-speed="2" alt="" />
+
+      <img
+        src="images/asetkecil1.png"
+        class="translateY"
+        data-speed="-2"
+        alt=""
+      />
+      <img
+        src="images/asetkecil2.png"
+        class="translateX"
+        data-speed="-2"
+        alt=""
+      />
+      <img
+        src="images/asetgedungkiri.png"
+        class="translateX"
+        data-speed="-2"
+        alt=""
+      />
+      <img 
+      src="images/aset3.png" 
+      class="translateY" 
+      data-speed="2" 
+      alt="" />
+      <h1 id="text" class="translateX" data-speed="-3">CLEVER.Inc</h1>
+      <a href="#about" id="btn">Explore</a>
+    </section>
+
+    <section id="about" class="section-padding">
+      <div class="container grid">
+        <div class="left-content">
+          <h4>Siapa itu CLEVER.Inc?</h4>
+        </div>
+        <div class="right-content">
+          <img src="images/clover4.png" alt="" />
+        </div>
+      </div>
+      <div class="container grid">
+        <div class="left-content">
+          <img src="images/business-team.gif" alt="" />
+        </div>
+        <div class="right-content">
+          <p>
+            Clever.Inc merupakan sebuah startup yang membuat SmartLock Door.
+            Clever.Inc berfokus pada layanan jasa pembuatan Lock Door yang
+            menggunakan RFID Card. Kami menawarkan solusi inovatif bagi
+            permasalahan keamanan pintu kalian. Clever.Inc membuat pemakai
+            produk SmartLock Door kami menjadi merasa aman dan membuat
+            penggunaan produk pintu kami menjadi lebih efisien.
+          </p>
+        </div>
+      </div>
+      <div class="container grid">
+        <div class="left-content">
+          <h4>Kapan Clever.Inc terbentuk?</h4>
+        </div>
+        <div class="right-content">
+          <p>
+            Clever.Inc terbentuk pada tanggal 4 Agustus 2022 oleh 3 orang, yaitu
+            Bisma Gyndara, Fadhli Fathoni dan Hatif Ghazy.
+          </p>
+        </div>
+      </div>
+      <div class="container grid">
+        <div class="left-content">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta quos,
+            quam exercitationem labore commodi, Quaerat doloremque deserunt
+            perspiciatis pariatur similique non iure iusto!
+          </p>
+        </div>
+        <div class="right-content">
+          <h4>Anggota CLEVER.Inc</h4>
+        </div>
+      </div>
+      <div class="container grid">
+        <div class="left-content">
+          <h5 class="heading-profile">Bisma Gyndara Mages Jayalangit</h5>
+          <p class="description">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit aut
+            possimus recusandae? Lorem, ipsum dolor sit amet consectetur
+            adipisicing elit. Eaque id et nisi consectetur
+          </p>
+        </div>
+        <div class="right-content">
+          <img class="profile" src="images/bisma.jpeg" alt="" />
+        </div>
+      </div>
+      <div class="container grid">
+        <div class="left-content">
+          <h5 class="heading-profile">Muhammad Fadhli Fathoni</h5>
+          <p class="description">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit aut
+            possimus recusandae? Lorem, ipsum dolor sit amet consectetur
+            adipisicing elit. Eaque id et nisi consectetur
+          </p>
+        </div>
+        <div class="right-content">
+          <img class="profile" src="images/fadhli.jpeg" alt="" />
+        </div>
+      </div>
+      <div class="container grid">
+        <div class="left-content">
+          <h5 class="heading-profile">Muhammad Hatif Ghazy</h5>
+          <p class="description">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit aut
+            possimus recusandae? Lorem, ipsum dolor sit amet consectetur
+            adipisicing elit. Eaque id et nisi consectetur
+          </p>
+        </div>
+        <div class="right-content">
+          <img class="profile" src="images/hatif.jpeg" alt="" />
+        </div>
+      </div>
+      <div class="container grid">
+        
+          <a href="index.html" id="btn2">Explore</a>
+       </div>
+    </section>
+    <footer>
+      <div class="container">
+        <a href="#hero">
+          <h1>CLEVER.Inc</h1>
+        </a>
+      </div>
+    </footer>
+    <script>
+      const translateX = document.querySelectorAll(".translateX");
+      const translateY = document.querySelectorAll(".translateY");
+      window.addEventListener("scroll", () => {
+        let scroll = window.pageYOffset;
+        translateX.forEach((element) => {
+          let speed = element.dataset.speed;
+          element.style.transform = `translateX(${scroll * speed}px)`;
+        });
+        translateY.forEach((element) => {
+          let speed = element.dataset.speed;
+          element.style.transform = `translateY(${scroll * speed}px)`;
+        });
+      });
+    </script>
+    <script src="app.js"></script>
+  </body>
+</html>
